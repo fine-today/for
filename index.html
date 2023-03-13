@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      [data-pop="true"] {
+        overflow: hidden;
+      }
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+      .pop-wrap {
+        display: none;
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .pop-wrap.active {
+        display: flex;
+      }
+      .pop-wrap .dimm {
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .pop-wrap .pop-con {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 10;
+        width: 500px;
+        height: 800px;
+        max-width: 90vw;
+        max-height: 90vh;
+        background-color: #fff;
+        padding: 0 30px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-bottom: 30px;
+      }
+      .pop-wrap .pop-con .close {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 20;
+        position: absolute;
+        right: 5px;
+        top: 10px;
+        width: 20px;
+        height: 20px;
+        font-size: 0;
+        line-height: 0;
+        border: 0;
+        background-color: transparent;
+      }
+      .pop-wrap .pop-con .close:before {
+        display: block;
+        content: "x";
+        font-size: 30px;
+      }
+
+      .pop-wrap .pop-con .pop-header {
+        text-align: center;
+        font-size: 14px;
+      }
+      .pop-wrap .pop-con .pop-header .logo {
+      }
+      .pop-wrap .pop-con .pop-header .con {
+      }
+      .pop-wrap .pop-con .pop-header .con p {
+      }
+      .pop-wrap .pop-con .pop-header .con b {
+        font-weight: 600;
+      }
+      .pop-wrap .pop-con .color-blue {
+        color: #11a6e9;
+        font-weight: bold;
+      }
+      .pop-wrap .pop-con .email {
+        padding: 0 40px;
+      }
+      .pop-wrap .pop-con .pop-body {
+        border-bottom: 10px solid #e70012;
+      }
+      .pop-wrap .pop-con .pop-body article {
+        display: flex;
+        gap: 10px;
+        border-top: 5px solid #ddd;
+        padding: 20px 0;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 1.5;
+        letter-spacing: -0.04em;
+      }
+      .pop-wrap .pop-con .pop-body article.no-border {
+        padding-top: 0;
+        border: 0;
+        margin-top: -15px;
+      }
+      .pop-wrap .pop-con .pop-body .number {
+        color: #e70012;
+      }
+      .pop-wrap .pop-con .pop-body .con-list {
+      }
+      .pop-wrap .pop-con .pop-body .con-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .pop-wrap .pop-con .pop-body .con-item .title {
+      }
+      .pop-wrap .pop-con .pop-body .con-item .text {
+        font-size: 12px;
+        font-weight: 500;
+        text-align: left;
+        flex: 1;
+      }
+      .pop-wrap .pop-con .pop-body .con-item .color-red {
+        color: #e70012;
+      }
+      .pop-wrap .pop-con .pop-body .con-item b {
+        font-weight: 600;
+      }
+    </style>
+    <script>
+      $(() => {
+        $("[data-pop-btn]").on("click", function () {
+          var $this = $(this),
+            thisPop = $this.attr("data-pop-btn"),
+            $thisPanel = $(`[data-pop-panel="${thisPop}"]`);
+          $thisPanel.toggleClass("active");
+          $("html").attr("data-pop", $thisPanel.hasClass("active"));
+        });
+        $(document).on("click", ".pop-wrap .close,.pop-wrap .dimm", function () {
+          $(this).closest(".pop-wrap").removeClass("active");
+          $("html").attr("data-pop", false);
+        });
+      });
+    </script>
+    <button type="button" data-pop-btn="pop1">팝업열기</button>
+    <div class="pop-wrap active" data-pop-panel="pop1">
+      <button type="button" class="dimm">닫기</button>
+      <div class="pop-con">
+        <button type="button" class="close">닫기</button>
+        <section class="pop-header">
+          <div class="logo"><img src="./images/logo.png" alt="order" /></div>
+          <div class="con">
+            <p>
+              <b>장투지원단 &lt;(주)연대와전진&gt;</b>입니다.<br />
+              주문방법 / 주문서식 안내합니다.
+            </p>
+            <p class="color-blue">아래 서식을 복사(Copy)하셔서 이메일로 발송해주십시오.</p>
+            <p class="email">
+              <img src="./images/email.png" alt="jangtoo@empas.com" />
+            </p>
+          </div>
+        </section>
+        <section class="pop-body">
+          <article>
+            <div class="number">①</div>
+            <div class="con-list">
+              <div class="con-item"><span class="title">품목 : </span></div>
+              <div class="con-item"><span class="title">수량 : </span></div>
+              <div class="con-item"><span class="title">사양 : </span><span class="text">(예시) 현수막 : 사이즈, 마감처리</span></div>
+              <div class="con-item"><span class="title" style="width: 34.5px"></span><span class="text">(예시) 피&nbsp;&nbsp;켓 : 기본 사이즈(60X90cm), 두께 5T(0.5cm) 또는 10T(1cm)</span></div>
+            </div>
+          </article>
+          <article>
+            <div class="number">②</div>
+            <div class="con-list">
+              <div class="con-item">
+                <span class="title">주문처 : </span>
+                <span class="text">(영수증용 명칭, 회사명, 단체명 등)</span>
+              </div>
+              <div class="con-item">
+                <span class="title">주문자 성함 / 직책 : </span>
+              </div>
+              <div class="con-item">
+                <span class="title">전화번호 : </span>
+                <span class="text">(휴대폰번호, 단체명 등)</span>
+              </div>
+              <div class="con-item">
+                <span class="title">도착희망일 / 시간 : </span>
+              </div>
+              <div class="con-item">
+                <span class="title">배송방법 : </span>
+                <span class="text"><b class="text-red">퀵서비스 / 택배 / 화물(주문자방문수령) / 고속버스</b> 등 선택사항</span>
+              </div>
+              <div class="con-item">
+                <span class="text"> (배송비 별도)</span>
+              </div>
+              <div class="con-item">
+                <span class="title">배송지 주소 : </span>
+              </div>
+              <div class="con-item">
+                <span class="title">수령인 / 휴대폰번호 : </span>
+              </div>
+            </div>
+          </article>
+          <article>
+            <div class="number">③</div>
+            <div class="con-list">
+              <div class="con-item">
+                <span class="title">제작에 필요한 원고 : </span>
+              </div>
+              <div class="con-item">
+                <div class="text">
+                  오타 점검하신 후 텍스트, 한글파일(hwp) 등 텍스트 형태의 원고 필수<br />
+                  <b class="color-red">*보내주신 원고 그대로 작업진행, 사진(이미지) 형식 원고는 작업 불가능</b>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article>
+            <div class="number">④</div>
+            <div class="con-list">
+              <div class="con-item">
+                <span class="title">기타 요청사항 : </span>
+              </div>
+            </div>
+          </article>
+          <article>
+            <div class="number">⑤</div>
+            <div class="con-list">
+              <div class="con-item">
+                <span class="title">세금계산서 요청시 : </span>
+                <span class="text">(부가세 별도)</span>
+              </div>
+              <div class="con-item">
+                <div class="text">사업자증(고유번호증),이메일 + 담당자 + 핸드폰</div>
+              </div>
+            </div>
+          </article>
+          <article class="no-border">
+            <div class="number">⑥</div>
+            <div class="con-list">
+              <div class="con-item">
+                <span class="title">카드결제시 : </span>
+                <span class="text">(부가세 별도)</span>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
