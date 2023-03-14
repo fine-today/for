@@ -94,6 +94,26 @@
       }
       .pop-wrap .pop-con .email {
         padding: 0 40px;
+        height: 42px;
+        text-align: center;
+      }
+      .pop-wrap .pop-con .email .img-wrap {
+        display: block;
+        position: absolute;
+        width: calc(100% - 140px);
+        height: 42px;
+        background: url(./images/email.png) no-repeat center center;
+        background-size: contain;
+      }
+      .pop-wrap .pop-con .email span:not(.img-wrap) {
+        position: relative;
+        z-index: 20;
+        font-size: 30px;
+        letter-spacing: 6px;
+        font-weight: bold;
+        line-height: 1.5;
+        color: #ddd;
+        top: -6px;
       }
       .pop-wrap .pop-con .pop-body {
         border-bottom: 10px solid #e70012;
@@ -151,6 +171,13 @@
           $(this).closest(".pop-wrap").removeClass("active");
           $("html").attr("data-pop", false);
         });
+        var email = "jangtoo@empas.com";
+        email.split("").forEach(function (elem, i) {
+          var $emailEl = $("<span></span>"),
+            $email = $(".email");
+          $emailEl.text(elem);
+          $email.append($emailEl);
+        });
       });
     </script>
     <button type="button" data-pop-btn="pop1">팝업열기</button>
@@ -167,10 +194,30 @@
             </p>
             <p class="color-blue">아래 서식을 복사(Copy)하셔서 이메일로 발송해주십시오.</p>
             <p class="email">
-              <img src="./images/email.png" alt="jangtoo@empas.com" />
+              <span class="img-wrap">
+                <!-- <img src="./images/email.png" alt="jangtoo@empas.com" /> -->
+              </span>
             </p>
           </div>
         </section>
+        <select
+          name=""
+          id=""
+          style="
+            width: 200px; /* 원하는 너비설정 */
+            padding: 0.8em 0.5em; /* 여백으로 높이 설정 */
+            font-family: inherit;
+            border: 1px solid #999;
+            border-radius: 0px; /* iOS 둥근모서리 제거 */
+            -webkit-appearance: none; /* 네이티브 외형 감추기 */
+            -moz-appearance: none;
+            appearance: none;
+          "
+        >
+          <option value="">123</option>
+          <option value="">123</option>
+          <option value="">123</option>
+        </select>
         <section class="pop-body">
           <article>
             <div class="number">①</div>
