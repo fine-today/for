@@ -37,7 +37,7 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        /* background-color: rgba(0, 0, 0, 0.5); */
       }
       .pop-wrap .pop-con {
         display: flex;
@@ -112,7 +112,7 @@
         letter-spacing: 6px;
         font-weight: bold;
         line-height: 1.5;
-        color: #ddd;
+        color: transparent;
         top: -6px;
       }
       .pop-wrap .pop-con .pop-body {
@@ -167,7 +167,7 @@
           $thisPanel.toggleClass("active");
           $("html").attr("data-pop", $thisPanel.hasClass("active"));
         });
-        $(document).on("click", ".pop-wrap .close,.pop-wrap .dimm", function () {
+        $(document).on("click", ".pop-wrap .dimm", function () {
           $(this).closest(".pop-wrap").removeClass("active");
           $("html").attr("data-pop", false);
         });
@@ -184,7 +184,7 @@
     <div class="pop-wrap active" data-pop-panel="pop1">
       <button type="button" class="dimm">닫기</button>
       <div class="pop-con">
-        <button type="button" class="close">닫기</button>
+        <!-- <button type="button" class="close">닫기</button> -->
         <section class="pop-header">
           <div class="logo"><img src="./images/logo.png" alt="order" /></div>
           <div class="con">
@@ -200,24 +200,6 @@
             </p>
           </div>
         </section>
-        <select
-          name=""
-          id=""
-          style="
-            width: 200px; /* 원하는 너비설정 */
-            padding: 0.8em 0.5em; /* 여백으로 높이 설정 */
-            font-family: inherit;
-            border: 1px solid #999;
-            border-radius: 0px; /* iOS 둥근모서리 제거 */
-            -webkit-appearance: none; /* 네이티브 외형 감추기 */
-            -moz-appearance: none;
-            appearance: none;
-          "
-        >
-          <option value="">123</option>
-          <option value="">123</option>
-          <option value="">123</option>
-        </select>
         <section class="pop-body">
           <article>
             <div class="number">①</div>
