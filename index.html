@@ -20,7 +20,7 @@
         display: none;
         z-index: 9999;
         justify-content: center;
-        align-items: center;
+        /* align-items: center; */
         position: fixed;
         left: 0;
         top: 0;
@@ -46,8 +46,6 @@
         z-index: 10;
         width: 500px;
         height: 800px;
-        max-width: 90vw;
-        max-height: 90vh;
         background-color: #fff;
         padding: 0 30px;
         overflow-y: auto;
@@ -157,6 +155,33 @@
       .pop-wrap .pop-con .pop-body .con-item b {
         font-weight: 600;
       }
+      .pop-wrap .btns {
+        display: flex;
+        justify-content: space-between;
+      }
+      button {
+        border: 0;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      .pop-wrap .btns .btn {
+        width: 228px;
+        height: 51px;
+      }
+      .pop-wrap .btns .btn:nth-child(1) {
+        background: url(./images/btn1.png) no-repeat center center;
+        background-size: contain;
+      }
+      .pop-wrap .btns .btn:nth-child(2) {
+        background: url(./images/btn2.png) no-repeat center center;
+        background-size: contain;
+      }
+      .pop-wrap textarea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+      }
     </style>
     <script>
       $(() => {
@@ -178,12 +203,49 @@
           $emailEl.text(elem);
           $email.append($emailEl);
         });
+        $("button.btn").on("click", function () {
+          var text = $(".pop-wrap textarea");
+          text.select();
+          document.execCommand("copy");
+          alert("복사되었습니다.");
+        });
       });
     </script>
     <button type="button" data-pop-btn="pop1">팝업열기</button>
     <div class="pop-wrap active" data-pop-panel="pop1">
       <button type="button" class="dimm">닫기</button>
       <div class="pop-con">
+        <textarea name="" id="" cols="30" rows="10">
+          ① 품목 : 
+          수량 : 
+          사양 : (예시) 현수막 : 사이즈, 마감처리
+          (예시) 피켓 : 기본 사이즈(60X90cm), 두께 5T(0.5cm) 또는 10T(1cm)
+    
+          ② 주문처 : (영수증용 명칭, 회사명, 단체명 등)
+          주문자 성함 / 직책 : 
+          전화번호 : (휴대폰번호, 단체명 등)
+          도착희망일 / 시간 : 
+          배송방법 : 퀵서비스 / 택배 / 화물(주문자방문수령) / 고속버스 등 선택사항
+
+          ② 주문처 : (영수증용 명칭, 회사명, 단체명 등)
+          주문자 성함 / 직책 :
+          전화번호 : (휴대폰번호, 단체명 등)
+          도착희망일 / 시간 : 
+          배송방법 : 퀵서비스 / 택배 / 화물(주문자방문수령) / 고속버스 등 선택사항 (배송비 별도)
+          배송지 주소 : 
+          수령인 / 휴대폰번호 : 
+
+          ③ 제작에 필요한 원고 : 
+          오타 점검하신 후 텍스트, 한글파일(hwp) 등 텍스트 형태의 원고 필수
+          *보내주신 원고 그대로 작업진행, 사진(이미지) 형식 원고는 작업 불가능
+
+          ④ 기타 요청사항 : 
+
+          ⑤ 세금계산서 요청시 : (부가세 별도)
+          사업자증(고유번호증),이메일 + 담당자 + 핸드폰
+
+          ⑥ 카드결제시 : (부가세 별도)
+        </textarea>
         <!-- <button type="button" class="close">닫기</button> -->
         <section class="pop-header">
           <div class="logo"><img src="./images/logo.png" alt="order" /></div>
@@ -198,6 +260,10 @@
                 <!-- <img src="./images/email.png" alt="jangtoo@empas.com" /> -->
               </span>
             </p>
+            <div class="btns">
+              <button type="button" class="btn"></button>
+              <a href="" class="btn"></a>
+            </div>
           </div>
         </section>
         <section class="pop-body">
